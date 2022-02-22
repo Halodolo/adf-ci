@@ -1,0 +1,9 @@
+{
+	"name": "mt-je",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "befd0c48-b3ba-4285-aeb9-b1d9c86b86c6",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
