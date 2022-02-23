@@ -1,5 +1,5 @@
 {
-	"name": "CICDDemo",
+	"name": "pipelinedemo",
 	"properties": {
 		"activities": [
 			{
@@ -13,7 +13,7 @@
 			}
 		],
 		"annotations": [],
-		"lastPublishTime": "2022-02-23T00:28:33Z"
+		"lastPublishTime": "2022-02-22T21:04:22Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }

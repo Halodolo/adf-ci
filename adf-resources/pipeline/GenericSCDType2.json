@@ -53,7 +53,8 @@
 					"compute": {
 						"coreCount": 8,
 						"computeType": "General"
-					}
+					},
+					"traceLevel": "Fine"
 				}
 			}
 		],
@@ -75,7 +76,7 @@
 			"name": "GenericSCD"
 		},
 		"annotations": [],
-		"lastPublishTime": "2020-10-12T17:56:18Z"
+		"lastPublishTime": "2022-02-22T22:33:55Z"
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
 }
