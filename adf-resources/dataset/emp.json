@@ -1,0 +1,29 @@
+{
+	"name": "emp",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStoragecollab",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "emp.csv",
+				"container": "adftutorial"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"type": "String"
+			},
+			{
+				"type": "String"
+			}
+		]
+	}
+}
