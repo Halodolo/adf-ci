@@ -11,6 +11,18 @@
 		"AzureSqlDbo_connectionString": {
 			"value": ""
 		},
+		"AzureBlobStorage50_properties_privateLinkResourceId": {
+			"value": "/subscriptions/3d0b786f-0663-4a02-8925-507ed56e40d7/resourceGroups/mt-jespindola/providers/Microsoft.Storage/storageAccounts/mtje"
+		},
+		"AzureBlobStorage50_properties_groupId": {
+			"value": "blob"
+		},
+		"AzureBlobStorage50_properties_ipAddress": {
+			"value": null
+		},
+		"AzureBlobStorage50_properties_resourceId": {
+			"value": "/subscriptions/d96253b6-7b25-4720-8e12-8d69861c5c72/resourceGroups/vnet-d96253b6-eastus-93-rg/providers/Microsoft.Network/privateEndpoints/mt-je.AzureBlobStorage50"
+		},
 		"containerUri": {
 			"value": ""
 		},

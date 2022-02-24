@@ -7,32 +7,35 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "mt-je"
 		},
+		"AzureSqlDbo_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'AzureSqlDbo'"
+		},
 		"AzureBlobStoragecollab_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureBlobStoragecollab'"
 		},
-		"AzureSqlDbo_connectionString": {
-			"type": "secureString",
-			"metadata": "Secure string for 'connectionString' of 'AzureSqlDbo'"
+		"AzureBlobStorage50_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/3d0b786f-0663-4a02-8925-507ed56e40d7/resourceGroups/mt-jespindola/providers/Microsoft.Storage/storageAccounts/mtje"
+		},
+		"AzureBlobStorage50_properties_groupId": {
+			"type": "string",
+			"defaultValue": "blob"
+		},
+		"AzureBlobStorage50_properties_ipAddress": {
+			"type": "object",
+			"defaultValue": null
+		},
+		"AzureBlobStorage50_properties_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d96253b6-7b25-4720-8e12-8d69861c5c72/resourceGroups/vnet-d96253b6-eastus-93-rg/providers/Microsoft.Network/privateEndpoints/mt-je.AzureBlobStorage50"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureBlobStoragecollab')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobStorage",
-				"typeProperties": {
-					"connectionString": "[parameters('AzureBlobStoragecollab_connectionString')]"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDbo')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -47,38 +50,11 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/emp')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
+			"name": "[concat(parameters('factoryName'), '/default')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks",
 			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureBlobStoragecollab",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "emp.csv",
-						"container": "adftutorial"
-					},
-					"columnDelimiter": ",",
-					"escapeChar": "\\",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"type": "String"
-					},
-					{
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStoragecollab')]"
-			]
+			"properties": {},
+			"dependsOn": []
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/dbo')]",
@@ -113,6 +89,100 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDbo')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/CentralUSIR')]",
+			"type": "Microsoft.DataFactory/factories/integrationRuntimes",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"type": "Managed",
+				"description": "Security lab",
+				"typeProperties": {
+					"computeProperties": {
+						"location": "East US",
+						"dataFlowProperties": {
+							"computeType": "General",
+							"coreCount": 8,
+							"timeToLive": 10,
+							"cleanup": false
+						}
+					}
+				},
+				"managedVirtualNetwork": {
+					"type": "ManagedVirtualNetworkReference",
+					"referenceName": "default"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/default/AzureBlobStorage50')]",
+			"type": "Microsoft.DataFactory/factories/managedVirtualNetworks/managedPrivateEndpoints",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"privateLinkResourceId": "[parameters('AzureBlobStorage50_properties_privateLinkResourceId')]",
+				"groupId": "[parameters('AzureBlobStorage50_properties_groupId')]",
+				"ipAddress": "[parameters('AzureBlobStorage50_properties_ipAddress')]",
+				"resourceId": "[parameters('AzureBlobStorage50_properties_resourceId')]"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/managedVirtualNetworks/default')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStoragecollab')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('AzureBlobStoragecollab_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "CentralUSIR",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/integrationRuntimes/CentralUSIR')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/emp')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureBlobStoragecollab",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "emp.csv",
+						"container": "adftutorial"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"type": "String"
+					},
+					{
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStoragecollab')]"
 			]
 		},
 		{
@@ -209,6 +279,37 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/emp')]",
 				"[concat(variables('factoryId'), '/datasets/dbo')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/RunEveryminute')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "Copyemp",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 1,
+						"startTime": "2022-02-24T17:20:00",
+						"endTime": "2022-02-25T17:20:00",
+						"timeZone": "Pacific Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/Copyemp')]"
 			]
 		}
 	]

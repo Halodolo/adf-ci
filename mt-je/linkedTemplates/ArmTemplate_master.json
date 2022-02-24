@@ -15,6 +15,22 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDbo'"
 		},
+		"AzureBlobStorage50_properties_privateLinkResourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/3d0b786f-0663-4a02-8925-507ed56e40d7/resourceGroups/mt-jespindola/providers/Microsoft.Storage/storageAccounts/mtje"
+		},
+		"AzureBlobStorage50_properties_groupId": {
+			"type": "string",
+			"defaultValue": "blob"
+		},
+		"AzureBlobStorage50_properties_ipAddress": {
+			"type": "object",
+			"defaultValue": null
+		},
+		"AzureBlobStorage50_properties_resourceId": {
+			"type": "string",
+			"defaultValue": "/subscriptions/d96253b6-7b25-4720-8e12-8d69861c5c72/resourceGroups/vnet-d96253b6-eastus-93-rg/providers/Microsoft.Network/privateEndpoints/mt-je.AzureBlobStorage50"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -42,11 +58,23 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureSqlDbo_connectionString": {
+						"value": "[parameters('AzureSqlDbo_connectionString')]"
+					},
 					"AzureBlobStoragecollab_connectionString": {
 						"value": "[parameters('AzureBlobStoragecollab_connectionString')]"
 					},
-					"AzureSqlDbo_connectionString": {
-						"value": "[parameters('AzureSqlDbo_connectionString')]"
+					"AzureBlobStorage50_properties_privateLinkResourceId": {
+						"value": "[parameters('AzureBlobStorage50_properties_privateLinkResourceId')]"
+					},
+					"AzureBlobStorage50_properties_groupId": {
+						"value": "[parameters('AzureBlobStorage50_properties_groupId')]"
+					},
+					"AzureBlobStorage50_properties_ipAddress": {
+						"value": "[parameters('AzureBlobStorage50_properties_ipAddress')]"
+					},
+					"AzureBlobStorage50_properties_resourceId": {
+						"value": "[parameters('AzureBlobStorage50_properties_resourceId')]"
 					}
 				}
 			},
