@@ -1,0 +1,9 @@
+{
+	"name": "AzureBlobStorage50",
+	"properties": {
+		"privateLinkResourceId": "/subscriptions/3d0b786f-0663-4a02-8925-507ed56e40d7/resourceGroups/mt-jespindola/providers/Microsoft.Storage/storageAccounts/mtje",
+		"groupId": "blob",
+		"ipAddress": null,
+		"resourceId": "/subscriptions/d96253b6-7b25-4720-8e12-8d69861c5c72/resourceGroups/vnet-d96253b6-eastus-93-rg/providers/Microsoft.Network/privateEndpoints/mt-je.AzureBlobStorage50"
+	}
+}
