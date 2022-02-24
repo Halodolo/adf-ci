@@ -4,15 +4,8 @@
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"sasUri": {
-				"type": "AzureKeyVaultSecret",
-				"store": {
-					"referenceName": "mtjekeyservice",
-					"type": "LinkedServiceReference"
-				},
-				"secretName": "BLOBSAS",
-				"secretVersion": "19601b02949a4d11825e5ad1b8b363b3"
-			}
+			"serviceEndpoint": "https://mtje.blob.core.windows.net",
+			"accountKind": "StorageV2"
 		},
 		"connectVia": {
 			"referenceName": "CentralUSIR",
