@@ -1,0 +1,10 @@
+{
+	"name": "mtjekeyservice",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://mt-jekeys.vault.azure.net/"
+		}
+	}
+}
