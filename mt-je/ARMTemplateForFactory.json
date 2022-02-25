@@ -11,9 +11,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AzureSqlDbo'"
 		},
-		"AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName": {
+		"AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint": {
 			"type": "string",
-			"defaultValue": "SSBLOB"
+			"defaultValue": "https://mtje.blob.core.windows.net"
 		},
 		"SBLOB_properties_typeProperties_baseUrl": {
 			"type": "string",
@@ -213,14 +213,8 @@
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"sasUri": {
-						"type": "AzureKeyVaultSecret",
-						"store": {
-							"referenceName": "SBLOB",
-							"type": "LinkedServiceReference"
-						},
-						"secretName": "[parameters('AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName')]"
-					}
+					"serviceEndpoint": "[parameters('AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint')]",
+					"accountKind": "StorageV2"
 				},
 				"connectVia": {
 					"referenceName": "EASTUSIR",
@@ -228,8 +222,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/EASTUSIR')]",
-				"[concat(variables('factoryId'), '/linkedServices/SBLOB')]"
+				"[concat(variables('factoryId'), '/integrationRuntimes/EASTUSIR')]"
 			]
 		},
 		{
