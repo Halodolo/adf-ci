@@ -15,9 +15,9 @@
 			"type": "string",
 			"defaultValue": "https://mt-jekey.vault.azure.net/"
 		},
-		"AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint": {
+		"AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName": {
 			"type": "string",
-			"defaultValue": "https://mtje.blob.core.windows.net"
+			"defaultValue": "SSBLOB"
 		},
 		"AzureBlobStorage50_properties_privateLinkResourceId": {
 			"type": "string",
@@ -136,16 +136,18 @@
 				"annotations": [],
 				"type": "AzureBlobStorage",
 				"typeProperties": {
-					"serviceEndpoint": "[parameters('AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint')]",
-					"accountKind": "StorageV2"
-				},
-				"connectVia": {
-					"referenceName": "EASTUSIR",
-					"type": "IntegrationRuntimeReference"
+					"sasUri": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "SBLOB",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName')]"
+					}
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/EASTUSIR')]"
+				"[concat(variables('factoryId'), '/linkedServices/SBLOB')]"
 			]
 		},
 		{

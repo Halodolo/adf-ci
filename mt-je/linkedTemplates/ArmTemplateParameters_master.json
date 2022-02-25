@@ -8,8 +8,8 @@
 		"AzureSqlDbo_connectionString": {
 			"value": ""
 		},
-		"AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint": {
-			"value": "https://mtje.blob.core.windows.net"
+		"AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName": {
+			"value": "SSBLOB"
 		},
 		"SBLOB_properties_typeProperties_baseUrl": {
 			"value": "https://mt-jekey.vault.azure.net/"
