@@ -1,0 +1,10 @@
+{
+	"name": "SBLOB",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://mt-jekey.vault.azure.net/"
+		}
+	}
+}
