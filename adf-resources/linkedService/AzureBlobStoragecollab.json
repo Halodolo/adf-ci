@@ -4,12 +4,14 @@
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"serviceEndpoint": "https://mtje.blob.core.windows.net",
-			"accountKind": "StorageV2"
-		},
-		"connectVia": {
-			"referenceName": "EASTUSIR",
-			"type": "IntegrationRuntimeReference"
+			"sasUri": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "SBLOB",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SSBLOB"
+			}
 		}
 	},
 	"type": "Microsoft.DataFactory/factories/linkedservices"
