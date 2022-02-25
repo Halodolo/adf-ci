@@ -8,8 +8,11 @@
 		"AzureSqlDbo_connectionString": {
 			"value": ""
 		},
-		"AzureBlobStoragecollab_properties_typeProperties_serviceEndpoint": {
-			"value": "https://mtje.blob.core.windows.net"
+		"AzureBlobStoragecollab_properties_typeProperties_sasUri_secretName": {
+			"value": "SSBLOB"
+		},
+		"SBLOB_properties_typeProperties_baseUrl": {
+			"value": "https://mt-jekey.vault.azure.net/"
 		},
 		"AzureBlobStorage50_properties_privateLinkResourceId": {
 			"value": "/subscriptions/3d0b786f-0663-4a02-8925-507ed56e40d7/resourceGroups/mt-jespindola/providers/Microsoft.Storage/storageAccounts/mtje"
